@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using MagazineStateImporterBackend.Api.Extensions;
 using MagazineStateImporterBackend.Api.Models;
-using MagazineStateImporterBackend.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
 
 namespace MagazineStateImporterBackend.Api.Mapper
 {
@@ -13,7 +9,7 @@ namespace MagazineStateImporterBackend.Api.Mapper
     {
         public MagazineStateImporterProfile()
         {
-            CreateMap<ImportMagazineState, MagazineStateImporterInput>()
+            CreateMap<ImportMagazineState, MagazineMaterialsStateImporterInput>()
                 .ForMember(destination => destination.UnparsedInput, 
                 source => source.MapFrom(src => src.File.GetFileLines()));
         }

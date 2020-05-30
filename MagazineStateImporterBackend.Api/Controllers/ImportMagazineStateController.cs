@@ -33,7 +33,7 @@ namespace MagazineStateImporterBackend.Api.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.ToString()});
+                return BadRequest(new { Error = ex.ToString() });
             }
             
         }

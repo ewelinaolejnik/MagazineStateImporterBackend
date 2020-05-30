@@ -13,9 +13,10 @@ namespace MagazineStateImporterBackend.Core.Models
 
         public MagazineMaterialsState()
         {
-            MaterialsStates = new List<MaterialState>();
+            _materialsStates = new List<MaterialState>();
         }
 
-        public List<MaterialState> MaterialsStates { get; set; }
+        private List<MaterialState> _materialsStates;
+        public List<MaterialState> MaterialsStates => _materialsStates.OrderBy(s => s.MaterialId).ToList();
     }
 }

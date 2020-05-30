@@ -3,7 +3,7 @@ using MagazineStateImporterBackend.Core.MaterialInventoryStateParser;
 using MagazineStateImporterBackend.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace MagazineStateImporterBackend.Core.MagazineStateImporter
 {
@@ -14,7 +14,7 @@ namespace MagazineStateImporterBackend.Core.MagazineStateImporter
         {
             var materialInventoryStates = new List<MaterialInventoryState>();
 
-            foreach (var unparsedState in input?.UnparsedStates)
+            foreach (var unparsedState in input?.UnparsedStates?.SkipWhile(us=>us.StartsWith("#")))
             {
                 materialInventoryStates.Add(Parse(unparsedState));
             }

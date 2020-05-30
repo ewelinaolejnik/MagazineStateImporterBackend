@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using MagazineStateImporterBackend.Core.MagazineStateBuilder.Models;
+using MagazineStateImporterBackend.Core.MaterialInventoryStateParser.Models;
 
 namespace MagazineStateImporterBackend.Core.MapperToMagazineState
 {
-    public class MapperToMagazineState
+    public class MapperToMagazineState: IMapperToMagazineState<MagazineMaterialsState, MaterialInventoryState>
     {
         public IEnumerable<MagazineMaterialsState> Map(IEnumerable<MaterialInventoryState> materialInventoryStates)
         {
@@ -48,5 +50,6 @@ namespace MagazineStateImporterBackend.Core.MapperToMagazineState
 
             return mapperHelperDictionary.Values;
         }
+
     }
 }
