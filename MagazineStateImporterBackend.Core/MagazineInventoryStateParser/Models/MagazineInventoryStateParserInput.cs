@@ -4,8 +4,8 @@ using System.Text;
 
 namespace MagazineStateImporterBackend.Core.Models
 {
-    public class MagazineStateImporterInput
+    public class MagazineInventoryStateParserInput
     {
-        public IEnumerable<string> FileLines { get; set; }
+        public IEnumerable<string> UnparsedStates { get; set; }
     }
 }

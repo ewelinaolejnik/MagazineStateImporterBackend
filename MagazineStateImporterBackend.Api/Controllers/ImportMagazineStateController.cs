@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using MagazineStateImporterBackend.Api.Models;
 using MagazineStateImporterBackend.Core.MagazineStateImporter;
+using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
 using MagazineStateImporterBackend.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +13,10 @@ namespace MagazineStateImporterBackend.Api.Controllers
     [ApiController]
     public class ImportMagazineStateController : ControllerBase
     {
-        private readonly IMagazineStateImporter _magazineStateImporter;
+        private readonly IMagazineStateImporter<MagazineMaterialsState, MagazineMaterialsStateImporterInput> _magazineStateImporter;
         private readonly IMapper _mapper;
 
-        public ImportMagazineStateController(IMapper mapper, IMagazineStateImporter magazineStateImporter)
+        public ImportMagazineStateController(IMapper mapper, IMagazineStateImporter<MagazineMaterialsState, MagazineMaterialsStateImporterInput> magazineStateImporter)
         {
             _mapper = mapper;
             _magazineStateImporter = magazineStateImporter;
@@ -29,7 +27,7 @@ namespace MagazineStateImporterBackend.Api.Controllers
         {
             try
             {
-                MagazineStateImporterInput magazineStateImporterInput = _mapper.Map<MagazineStateImporterInput>(importMagazineState);
+                MagazineMaterialsStateImporterInput magazineStateImporterInput = _mapper.Map<MagazineMaterialsStateImporterInput>(importMagazineState);
                 var magazinesStates = _magazineStateImporter.GetImportedMagazinesStates(magazineStateImporterInput);
                 return Ok(magazinesStates);
             }

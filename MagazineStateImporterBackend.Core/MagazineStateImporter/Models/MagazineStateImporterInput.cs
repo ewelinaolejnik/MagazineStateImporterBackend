@@ -4,9 +4,8 @@ using System.Text;
 
 namespace MagazineStateImporterBackend.Core.Models
 {
-    internal class MaterialAmoutPerMagazine
+    public class MagazineStateImporterInput
     {
-        public string MagazineName { get; set; }
-        public int Amout { get; set; }
+        public IEnumerable<string> UnparsedInput { get; set; }
     }
 }
