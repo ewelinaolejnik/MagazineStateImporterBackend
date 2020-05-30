@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using MagazineStateImporterBackend.Core.MagazineStateImporter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,8 @@ namespace MagazineStateImporterBackend.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IMagazineStateImporter, MagazineStateImporter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
