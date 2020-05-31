@@ -12,21 +12,26 @@ namespace MagazineStateImporterBackend.Core.MagazineStateSourceParser
     {
         public IEnumerable<MagazineStateSource> GetDataFromSource(ParserInput input)
         {
-            var materialInventoryStates = new List<MagazineStateSource>();
-
-            foreach (var unparsedState in input?.UnparsedStates?.SkipWhile(us => us.StartsWith("#")))
+            if (input?.UnparsedStates == null || !input.UnparsedStates.Any())
             {
-                materialInventoryStates.Add(Parse(unparsedState));
+                throw new ArgumentNullException("Passed parser input is null or empty");
             }
 
-            return materialInventoryStates;
+            var magazineStateSources = new List<MagazineStateSource>();
+
+            foreach (var unparsedState in input.UnparsedStates.SkipWhile(us => us.StartsWith("#")))
+            {
+                magazineStateSources.Add(Parse(unparsedState));
+            }
+
+            return magazineStateSources;
         }
 
         public MagazineStateSource Parse(string unparsedState)
         {
             if (string.IsNullOrEmpty(unparsedState))
             {
-                throw new ArgumentNullException("Passed unparsed state is null");
+                throw new ArgumentNullException("Passed unparsed state is null or empty");
             }
 
             try
