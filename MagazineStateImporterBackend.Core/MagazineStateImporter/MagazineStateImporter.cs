@@ -1,4 +1,5 @@
-﻿using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
+﻿using MagazineStateImporterBackend.Core.MagazineStateImporter.Extensions;
+using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
 using MagazineStateImporterBackend.Core.MagazineStateSourceParser.Models;
 using MagazineStateImporterBackend.Core.Shared.Interfaces;
 using MagazineStateImporterBackend.Core.Shared.Models.MagazineState;
@@ -12,6 +13,7 @@ namespace MagazineStateImporterBackend.Core.MagazineStateImporter
     {
         private readonly IMapperToDestinationState<MagazineState, MagazineStateSource> _mapperToMagazineState;
         private readonly IFromSource<MagazineStateSource, ParserInput> _fromSource;
+
         public MagazineStateImporter(IMapperToDestinationState<MagazineState, MagazineStateSource> mapperToMagazineState,
             IFromSource<MagazineStateSource, ParserInput> fromSource)
         {
@@ -28,6 +30,7 @@ namespace MagazineStateImporterBackend.Core.MagazineStateImporter
             var parsedMaterialInventoryStates = _fromSource.GetDataFromSource(parserInput)
                 .OrderBy(s=>s.MaterialId);
             return _mapperToMagazineState.Map(parsedMaterialInventoryStates)
+                .OrderMaterialsBy(s => s.MaterialId)
                 .OrderByDescending(s => s.MaterialsAmout)
                 .ThenByDescending(s => s.MagazineName);
         }

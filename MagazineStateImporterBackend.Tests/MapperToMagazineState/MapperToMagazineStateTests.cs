@@ -12,14 +12,13 @@ namespace MagazineStateImporterBackend.Tests.MapperToMagazineState
     {
         #region SetUp
         private Core.MapperToMagazineState.MapperToMagazineState sut;
-        private static List<MagazineStateSource> emptySource;
+        private static List<MagazineStateSource> emptySource = new List<MagazineStateSource>();
         private List<MagazineStateSource> source;
 
         [SetUp]
         public void Setup()
         {
             sut = new Core.MapperToMagazineState.MapperToMagazineState();
-            emptySource = new List<MagazineStateSource>();
             source = new List<MagazineStateSource>()
             {
                 new MagazineStateSource()
@@ -81,7 +80,7 @@ namespace MagazineStateImporterBackend.Tests.MapperToMagazineState
         [Test]
         [TestCase(null)]
         [TestCaseSource("emptySource")]
-        public void Map_throws_ArgumentNullException_when_isource_is_null_or_empty(IEnumerable<MagazineStateSource> source)
+        public void Map_throws_ArgumentNullException_when_source_is_null_or_empty(IEnumerable<MagazineStateSource> source)
         {
             Assert.Throws<ArgumentNullException>(() => sut.Map(source));
         }
