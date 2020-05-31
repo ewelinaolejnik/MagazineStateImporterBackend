@@ -25,7 +25,8 @@ namespace MagazineStateImporterBackend.Core.MagazineStateImporter
             {
                 UnparsedStates = input.UnparsedInput
             };
-            var parsedMaterialInventoryStates = _fromSource.GetDataFromSource(parserInput);
+            var parsedMaterialInventoryStates = _fromSource.GetDataFromSource(parserInput)
+                .OrderBy(s=>s.MaterialId);
             return _mapperToMagazineState.Map(parsedMaterialInventoryStates)
                 .OrderByDescending(s => s.MaterialsAmout)
                 .ThenByDescending(s => s.MagazineName);
