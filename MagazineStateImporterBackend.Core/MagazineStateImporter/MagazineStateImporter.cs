@@ -31,7 +31,7 @@ namespace MagazineStateImporterBackend.Core.MagazineStateImporter
                 .OrderBy(s=>s.MaterialId);
             return _mapperToMagazineState.Map(parsedMaterialInventoryStates)
                 .OrderMaterialsBy(s => s.MaterialId)
-                .OrderByDescending(s => s.MaterialsAmout)
+                .OrderByDescending(s => s.MaterialsAmount)
                 .ThenByDescending(s => s.MagazineName);
         }
     }

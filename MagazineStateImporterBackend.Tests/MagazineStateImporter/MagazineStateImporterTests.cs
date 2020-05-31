@@ -42,25 +42,25 @@ namespace MagazineStateImporterBackend.Tests.MagazineStateImporter
 
             magazineStates[2].MaterialsStates.Add(new MaterialState()
             {
-                MaterialAmout = 7,
+                MaterialAmount = 7,
                 MaterialId = "TestMaterial2Id"
             });
 
             magazineStates[2].MaterialsStates.Add(new MaterialState()
             {
-                MaterialAmout = 5,
+                MaterialAmount = 5,
                 MaterialId = "TestMaterial1Id"
             });
 
             magazineStates[0].MaterialsStates.Add(new MaterialState()
             {
-                MaterialAmout = 1,
+                MaterialAmount = 1,
                 MaterialId = "TestMaterial3Id"
             });
 
             magazineStates[1].MaterialsStates.Add(new MaterialState()
             {
-                MaterialAmout = 1,
+                MaterialAmount = 1,
                 MaterialId = "TestMaterial2Id"
             });
 

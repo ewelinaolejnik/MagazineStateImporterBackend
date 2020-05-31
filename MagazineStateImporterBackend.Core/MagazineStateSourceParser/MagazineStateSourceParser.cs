@@ -19,7 +19,7 @@ namespace MagazineStateImporterBackend.Core.MagazineStateSourceParser
 
             var magazineStateSources = new List<MagazineStateSource>();
 
-            foreach (var unparsedState in input.UnparsedStates.SkipWhile(us => us.StartsWith("#")))
+            foreach (var unparsedState in input.UnparsedStates.Where(us => !us.StartsWith("#")))
             {
                 magazineStateSources.Add(Parse(unparsedState));
             }

@@ -3,6 +3,6 @@
     public class MaterialState
     {
         public string MaterialId { get; set; }
-        public int MaterialAmout { get; set; }
+        public int MaterialAmount { get; set; }
     }
 }

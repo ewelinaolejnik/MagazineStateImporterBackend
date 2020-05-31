@@ -10,7 +10,7 @@ namespace MagazineStateImporterBackend.Api.Extensions
 {
     public static class FormFileExtensions
     {
-        public static async Task<IEnumerable<string>> GetFileLines(this IFormFile file)
+        public static IEnumerable<string> GetFileLines(this IFormFile file)
         {
             List<string> lines = new List<string>();
 
@@ -22,7 +22,7 @@ namespace MagazineStateImporterBackend.Api.Extensions
             using (var reader = new StreamReader(file.OpenReadStream()))
             {
                 while (reader.Peek() >= 0)
-                    lines.Add(await reader.ReadLineAsync());
+                    lines.Add(reader.ReadLine());
             }
 
             return lines;

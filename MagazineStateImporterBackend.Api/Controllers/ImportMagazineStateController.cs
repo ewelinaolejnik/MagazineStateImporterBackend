@@ -3,7 +3,6 @@ using AutoMapper;
 using MagazineStateImporterBackend.Api.Models;
 using MagazineStateImporterBackend.Core.MagazineStateImporter;
 using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
-using MagazineStateImporterBackend.Core.Shared.Models.MagazineState;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagazineStateImporterBackend.Api.Controllers
@@ -22,7 +21,7 @@ namespace MagazineStateImporterBackend.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult ImportMagazineState([FromBody] ImportMagazineState importMagazineState)
+        public IActionResult ImportMagazineState([FromForm] ImportMagazineState importMagazineState)
         {
             try
             {

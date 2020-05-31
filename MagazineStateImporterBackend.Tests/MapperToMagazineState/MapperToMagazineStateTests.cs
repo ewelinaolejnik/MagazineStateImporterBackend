@@ -60,21 +60,21 @@ namespace MagazineStateImporterBackend.Tests.MapperToMagazineState
 
             Assert.AreEqual(2, states.ElementAt(0).MaterialsStates.Count);
             Assert.AreEqual("TestMaterialId1", states.ElementAt(0).MaterialsStates[0].MaterialId);
-            Assert.AreEqual(4, states.ElementAt(0).MaterialsStates[0].MaterialAmout);
+            Assert.AreEqual(4, states.ElementAt(0).MaterialsStates[0].MaterialAmount);
             Assert.AreEqual("TestMaterialId2", states.ElementAt(0).MaterialsStates[1].MaterialId);
-            Assert.AreEqual(5, states.ElementAt(0).MaterialsStates[1].MaterialAmout);
+            Assert.AreEqual(5, states.ElementAt(0).MaterialsStates[1].MaterialAmount);
 
             Assert.AreEqual("TestMagazine2", states.ElementAt(1).MagazineName);
 
             Assert.AreEqual(1, states.ElementAt(1).MaterialsStates.Count);
             Assert.AreEqual("TestMaterialId1", states.ElementAt(1).MaterialsStates[0].MaterialId);
-            Assert.AreEqual(15, states.ElementAt(1).MaterialsStates[0].MaterialAmout);
+            Assert.AreEqual(15, states.ElementAt(1).MaterialsStates[0].MaterialAmount);
 
             Assert.AreEqual("TestMagazine3", states.ElementAt(2).MagazineName);
 
             Assert.AreEqual(1, states.ElementAt(2).MaterialsStates.Count);
             Assert.AreEqual("TestMaterialId2", states.ElementAt(2).MaterialsStates[0].MaterialId);
-            Assert.AreEqual(6, states.ElementAt(2).MaterialsStates[0].MaterialAmout);
+            Assert.AreEqual(6, states.ElementAt(2).MaterialsStates[0].MaterialAmount);
         }
 
         [Test]

@@ -40,7 +40,7 @@ namespace MagazineStateImporterBackend.Core.MapperToMagazineState
                     magazineMaterialsState.MaterialsStates
                             .Add(new MaterialState()
                             {
-                                MaterialAmout = amoutPerMagazine.Amout,
+                                MaterialAmount = amoutPerMagazine.Amout,
                                 MaterialId = materialInventoryState.MaterialId
                             });
                 }
