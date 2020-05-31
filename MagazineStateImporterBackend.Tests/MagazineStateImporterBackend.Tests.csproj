@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MapperToMagazineState\" />
     <Folder Include="MagazineStateImporter\" />
+    <Folder Include="Shared\Models\MagazineState\" />
   </ItemGroup>
 
   <ItemGroup>
