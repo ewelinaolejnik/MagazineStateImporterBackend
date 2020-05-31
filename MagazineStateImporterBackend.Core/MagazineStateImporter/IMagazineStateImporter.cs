@@ -1,14 +1,11 @@
-﻿using MagazineStateImporterBackend.Core.MagazineStateBuilder.Models;
-using MagazineStateImporterBackend.Core.Models;
-using System;
+﻿using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
+using MagazineStateImporterBackend.Core.Shared.Models.MagazineState;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MagazineStateImporterBackend.Core.MagazineStateImporter
 {
-    public interface IMagazineStateImporter<TOutput, TInput> where TOutput: MagazineState
-                                                             where TInput: MagazineStateImporterInput
+    public interface IMagazineStateImporter
     {
-        IEnumerable<TOutput> GetImportedMagazinesStates(TInput magazineStateImporterInput);
+        IEnumerable<MagazineState> GetImportedMagazinesStates(ImporterInput input);
     }
 }

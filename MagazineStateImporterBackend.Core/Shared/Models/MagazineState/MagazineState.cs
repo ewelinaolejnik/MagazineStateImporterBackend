@@ -1,17 +1,14 @@
-﻿using MagazineStateImporterBackend.Core.MagazineStateBuilder.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MagazineStateImporterBackend.Core.Models
+namespace MagazineStateImporterBackend.Core.Shared.Models.MagazineState
 {
-    public class MagazineMaterialsState: MagazineState
+    public class MagazineState
     {
         public string MagazineName { get; set; }
         public int MaterialsAmout => MaterialsStates.Sum(s => s.MaterialAmout);
 
-        public MagazineMaterialsState()
+        public MagazineState()
         {
             _materialsStates = new List<MaterialState>();
         }

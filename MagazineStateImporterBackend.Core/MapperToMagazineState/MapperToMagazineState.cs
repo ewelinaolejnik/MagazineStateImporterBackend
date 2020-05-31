@@ -1,26 +1,24 @@
-﻿using MagazineStateImporterBackend.Core.Models;
+﻿using MagazineStateImporterBackend.Core.Shared.Interfaces;
+using MagazineStateImporterBackend.Core.Shared.Models.MagazineState;
+using MagazineStateImporterBackend.Core.Shared.Models.MagazineStateSource;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using MagazineStateImporterBackend.Core.MagazineStateBuilder.Models;
-using MagazineStateImporterBackend.Core.MaterialInventoryStateParser.Models;
 
 namespace MagazineStateImporterBackend.Core.MapperToMagazineState
 {
-    public class MapperToMagazineState: IMapperToMagazineState<MagazineMaterialsState, MaterialInventoryState>
+    public class MapperToMagazineState: IMapperToDestinationState<MagazineState, MagazineStateSource>
     {
-        public IEnumerable<MagazineMaterialsState> Map(IEnumerable<MaterialInventoryState> materialInventoryStates)
+        public IEnumerable<MagazineState> Map(IEnumerable<MagazineStateSource> source)
         {
-            Dictionary<string, MagazineMaterialsState> mapperHelperDictionary = new Dictionary<string, MagazineMaterialsState>();
+            Dictionary<string, MagazineState> mapperHelperDictionary = new Dictionary<string, MagazineState>();
 
-            if(materialInventoryStates == null)
+            if(source == null)
             {
                 throw new ArgumentNullException("materialInventoryStates in MapperToMagazineState is null");
             }
 
-            MagazineMaterialsState magazineMaterialsState;
-            foreach (MaterialInventoryState materialInventoryState in materialInventoryStates)
+            MagazineState magazineMaterialsState;
+            foreach (MagazineStateSource materialInventoryState in source)
             {
                 foreach (var amoutPerMagazine in materialInventoryState.AmoutsPerMagazine)
                 {
@@ -30,7 +28,7 @@ namespace MagazineStateImporterBackend.Core.MapperToMagazineState
                     }
                     else
                     {
-                        magazineMaterialsState = new MagazineMaterialsState
+                        magazineMaterialsState = new MagazineState
                         {
                             MagazineName = amoutPerMagazine.MagazineName
                         };
@@ -44,7 +42,6 @@ namespace MagazineStateImporterBackend.Core.MapperToMagazineState
                                 MaterialAmout = amoutPerMagazine.Amout,
                                 MaterialId = materialInventoryState.MaterialId
                             });
-
                 }
             }
 

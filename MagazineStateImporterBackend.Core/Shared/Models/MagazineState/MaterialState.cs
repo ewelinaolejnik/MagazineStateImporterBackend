@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MagazineStateImporterBackend.Core.Models
+﻿namespace MagazineStateImporterBackend.Core.Shared.Models.MagazineState
 {
     public class MaterialState
     {

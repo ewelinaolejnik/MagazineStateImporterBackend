@@ -3,8 +3,7 @@ using AutoMapper;
 using MagazineStateImporterBackend.Api.Models;
 using MagazineStateImporterBackend.Core.MagazineStateImporter;
 using MagazineStateImporterBackend.Core.MagazineStateImporter.Models;
-using MagazineStateImporterBackend.Core.Models;
-using Microsoft.AspNetCore.Http;
+using MagazineStateImporterBackend.Core.Shared.Models.MagazineState;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagazineStateImporterBackend.Api.Controllers
@@ -13,10 +12,10 @@ namespace MagazineStateImporterBackend.Api.Controllers
     [ApiController]
     public class ImportMagazineStateController : ControllerBase
     {
-        private readonly IMagazineStateImporter<MagazineMaterialsState, MagazineMaterialsStateImporterInput> _magazineStateImporter;
+        private readonly IMagazineStateImporter _magazineStateImporter;
         private readonly IMapper _mapper;
 
-        public ImportMagazineStateController(IMapper mapper, IMagazineStateImporter<MagazineMaterialsState, MagazineMaterialsStateImporterInput> magazineStateImporter)
+        public ImportMagazineStateController(IMapper mapper, IMagazineStateImporter magazineStateImporter)
         {
             _mapper = mapper;
             _magazineStateImporter = magazineStateImporter;
@@ -27,8 +26,8 @@ namespace MagazineStateImporterBackend.Api.Controllers
         {
             try
             {
-                MagazineMaterialsStateImporterInput magazineStateImporterInput = _mapper.Map<MagazineMaterialsStateImporterInput>(importMagazineState);
-                var magazinesStates = _magazineStateImporter.GetImportedMagazinesStates(magazineStateImporterInput);
+                ImporterInput importerInput = _mapper.Map<ImporterInput>(importMagazineState);
+                var magazinesStates = _magazineStateImporter.GetImportedMagazinesStates(importerInput);
                 return Ok(magazinesStates);
             }
             catch(Exception ex)

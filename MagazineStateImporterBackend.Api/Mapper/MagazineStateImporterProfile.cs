@@ -9,7 +9,7 @@ namespace MagazineStateImporterBackend.Api.Mapper
     {
         public MagazineStateImporterProfile()
         {
-            CreateMap<ImportMagazineState, MagazineMaterialsStateImporterInput>()
+            CreateMap<ImportMagazineState, ImporterInput>()
                 .ForMember(destination => destination.UnparsedInput, 
                 source => source.MapFrom(src => src.File.GetFileLines()));
         }

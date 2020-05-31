@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MagazineStateImporterBackend.Core.Models
+namespace MagazineStateImporterBackend.Core.MagazineStateImporter.Models
 {
-    public class MagazineStateImporterInput
+    public class ImporterInput
     {
         public IEnumerable<string> UnparsedInput { get; set; }
     }
