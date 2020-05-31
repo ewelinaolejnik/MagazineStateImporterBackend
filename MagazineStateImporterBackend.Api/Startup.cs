@@ -1,5 +1,5 @@
 using AutoMapper;
-using MagazineStateImporterBackend.Core.MagazineStateImporter;
+using MagazineStateImporterBackend.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,14 +20,25 @@ namespace MagazineStateImporterBackend.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .WithOrigins(Configuration.GetValue<string>("ClientHost"))
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IMagazineStateImporter, MagazineStateImporter>();
+            services.AddMagazineStateImporterDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("CorsPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
