@@ -109,27 +109,6 @@ namespace MagazineStateImporterBackend.Tests.MagazineStateImporter
             parserMock.Verify(m => m.GetDataFromSource(It.IsAny<ParserInput>()), Times.Once);
             mapperMock.Verify(m => m.Map(source), Times.Once);
         }
-
-        [Test]
-        public void GetImportedMagazinesStates_returns_sorted_magazines_states_by_total_amount_or_magazine_name()
-        {
-            IEnumerable<MagazineState> magazinesStates = sut.GetImportedMagazinesStates(new Core.MagazineStateImporter.Models.ImporterInput());
-
-            Assert.IsNotNull(magazinesStates);
-            Assert.AreEqual("TestMagazine1", magazinesStates.ElementAt(0).MagazineName);
-            Assert.AreEqual("TestMagazine3", magazinesStates.ElementAt(1).MagazineName);
-            Assert.AreEqual("TestMagazine2", magazinesStates.ElementAt(2).MagazineName);
-        }
-
-        [Test]
-        public void GetImportedMagazinesStates_returns_sorted_materials_within_magazines_by_material_id()
-        {
-            IEnumerable<MagazineState> magazinesStates = sut.GetImportedMagazinesStates(new Core.MagazineStateImporter.Models.ImporterInput());
-
-            Assert.IsNotNull(magazinesStates.ElementAt(0).MaterialsStates);
-            Assert.AreEqual("TestMaterial1Id", magazinesStates.ElementAt(0).MaterialsStates[0].MaterialId);
-            Assert.AreEqual("TestMaterial2Id", magazinesStates.ElementAt(0).MaterialsStates[1].MaterialId);
-        }
         #endregion
     }
 }

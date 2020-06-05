@@ -36,24 +36,34 @@ namespace MagazineStateImporterBackend.Core.MagazineStateSourceParser
 
             try
             {
-                MagazineStateSource source = new MagazineStateSource();
-                string[] splitedState = unparsedState.Split(";");
-                source.MaterialName = splitedState[0];
-                source.MaterialId = splitedState[1];
-                foreach (string amoutPerMagazine in splitedState[2].Split("|"))
-                {
-                    string magazineName = amoutPerMagazine.Split(",")[0];
-                    int amout = int.Parse(amoutPerMagazine.Split(",")[1]);
-                    source.AmoutsPerMagazine
-                        .Add(new MaterialAmoutPerMagazine().InMagazine(magazineName).IsAmoutOf(amout));
-                }
+                var parsedMaterial = ParseMaterial(unparsedState);
+                var amoutsPerMagazines = parsedMaterial.AmountsPerMagazines.Split("|").Select(a => ParseAmountPerMagazine(a));
+                parsedMaterial.source.AmoutsPerMagazine.AddRange(amoutsPerMagazines);
 
-                return source;
+                return parsedMaterial.source;
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public (MagazineStateSource source, string AmountsPerMagazines) ParseMaterial(string unparsedState)
+        {
+            string[] splitedState = unparsedState.Split(";");
+            return (new MagazineStateSource()
+            {
+                MaterialId = splitedState[1],
+                MaterialName = splitedState[0]
+            }, splitedState[2]);
+        }
+
+        public MaterialAmoutPerMagazine ParseAmountPerMagazine(string unparsedAmoutPerMagazine)
+        {
+            string magazineName = unparsedAmoutPerMagazine.Split(",")[0];
+            int amout = int.Parse(unparsedAmoutPerMagazine.Split(",")[1]);
+
+            return new MaterialAmoutPerMagazine().InMagazine(magazineName).IsAmoutOf(amout);
         }
 
     }
