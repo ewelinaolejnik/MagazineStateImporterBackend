@@ -3,12 +3,9 @@ using MagazineStateImporterBackend.Core.Shared.Models.MagazineState;
 using MagazineStateImporterBackend.Core.Shared.Models.MagazineStateSource;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace MagazineStateImporterBackend.Tests.MagazineStateImporter
+namespace MagazineStateImporterBackend.Tests
 {
     [TestFixture]
     public class MagazineStateImporterTests

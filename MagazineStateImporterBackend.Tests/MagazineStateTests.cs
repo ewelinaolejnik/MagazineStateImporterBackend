@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace MagazineStateImporterBackend.Tests.Shared.Models.MagazineState
+namespace MagazineStateImporterBackend.Tests
 {
     [TestFixture]
     public class MagazineStateTests

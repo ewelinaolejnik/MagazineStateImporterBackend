@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MagazineStateImporterBackend.Tests.MagazineStateSourceParser
+namespace MagazineStateImporterBackend.Tests
 {
     [TestFixture]
     public class MagazineStateSourceParserTests
