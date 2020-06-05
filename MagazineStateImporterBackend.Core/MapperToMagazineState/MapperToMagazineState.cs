@@ -7,46 +7,39 @@ using System.Linq;
 
 namespace MagazineStateImporterBackend.Core.MapperToMagazineState
 {
-    public class MapperToMagazineState: IMapperToDestinationState<MagazineState, MagazineStateSource>
+    public class MapperToMagazineState : IMapperToDestinationState<MagazineState, MagazineStateSource>
     {
         public IEnumerable<MagazineState> Map(IEnumerable<MagazineStateSource> source)
         {
-            if(source == null || !source.Any())
+            if (source == null || !source.Any())
             {
                 throw new ArgumentNullException("Source is null or empty");
             }
 
-            Dictionary<string, MagazineState> mapperHelperDictionary = new Dictionary<string, MagazineState>();
-            MagazineState magazineMaterialsState;
+            List<MagazineState> magazineStates = new List<MagazineState>();
 
-            foreach (MagazineStateSource materialInventoryState in source)
+            var magazinesNames = source.SelectMany(s => s.AmoutsPerMagazine).Select(a => a.MagazineName).Distinct();
+            foreach (string magazineName in magazinesNames)
             {
-                foreach (var amoutPerMagazine in materialInventoryState.AmoutsPerMagazine)
-                {
-                    if (mapperHelperDictionary.ContainsKey(amoutPerMagazine.MagazineName))
-                    {
-                        magazineMaterialsState = mapperHelperDictionary[amoutPerMagazine.MagazineName];
-                    }
-                    else
-                    {
-                        magazineMaterialsState = new MagazineState
-                        {
-                            MagazineName = amoutPerMagazine.MagazineName
-                        };
-
-                        mapperHelperDictionary.Add(amoutPerMagazine.MagazineName, magazineMaterialsState);
-                    }
-
-                    magazineMaterialsState.MaterialsStates
-                            .Add(new MaterialState()
-                            {
-                                MaterialAmount = amoutPerMagazine.Amout,
-                                MaterialId = materialInventoryState.MaterialId
-                            });
-                }
+                magazineStates.Add(Map(source, magazineName));
             }
 
-            return mapperHelperDictionary.Values;
+            return magazineStates;
+        }
+
+        public MagazineState Map(IEnumerable<MagazineStateSource> source, string magazineName)
+        {
+            var sourcePerMagazine = source.Where(s => s.AmoutsPerMagazine.Any(a => a.MagazineName == magazineName));
+
+            return new MagazineState()
+            {
+                MagazineName = magazineName,
+                MaterialsStates = sourcePerMagazine.Select(s => new MaterialState()
+                {
+                    MaterialAmount = s.AmoutsPerMagazine.FirstOrDefault(a => a.MagazineName == magazineName).Amout,
+                    MaterialId = s.MaterialId
+                }).ToList()
+            };
         }
 
     }
